@@ -36,7 +36,7 @@ public:
     // Fill , Insert
     void PushElement(T Element)
     {
-        if (_Capacity > _Length) // _Capacity -->> index
+        if (_Capacity >= _Length) // _Capacity -->> index
         {                        // if the index exceed the length of array
             _ResizeTheArray();
         }
@@ -47,8 +47,9 @@ public:
 
     // Access
     T At(int Index) // return the element on specific index
-    {
-        if (Index > _Length || 0 > Index)
+    { 
+        // as num of elements = length -1 
+        if (Index >= _Length || 0 > Index)
             throw out_of_range("Index out of range");
 
         return _APtr[Index];
@@ -76,9 +77,9 @@ public:
     }
 
     // Delete
-    void PopBack() // O(1) Algorithm instead of O(N)
+    void PopBack() 
     {
-        T *ResizedArr = new T[this->_Capacity--]; // Temp dynamic array -- i used the index not the length to print the actual located size
+        T *ResizedArr = new T[this->_Capacity--]; // Temp dynamic array -- i used the index not the length to delete the element from the memory 
 
         for (int i = 0; i < _Capacity; i++) // make a copy of the current array
         {
@@ -89,12 +90,13 @@ public:
        _APtr = nullptr;
 
        _APtr = ResizedArr; // pointer will point the new array 
+
     }
 
     // Update
     void UpdateElement(int IndexOfElement, T NewValue)
     {
-        if (IndexOfElement > _Length || IndexOfElement < 0)
+        if (IndexOfElement >= _Length || IndexOfElement < 0)
             throw out_of_range("Index out of range");
 
         _APtr[IndexOfElement] = NewValue;
