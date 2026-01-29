@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 template <class T> // template class
@@ -7,31 +8,22 @@ class clsDynamicArray
 private:
     T *_APtr; // pointer to access heap to make dynamic array
     int _Length;
-    int _Indx = 0; // to move in array indices
+    int _Capacity = 0; // to move in array indices
 
     void _ResizeTheArray() // make copy of array then insert the elements again with new length
     {
+        _Length = _Length * 2;       // increment the length of array
+        T *ResizedArr = new T[_Length]; // ResizedArr (Dynamic array) with new length
 
-        T *TempArr = new T[_Length]; // TempArr (Dynamic array) with new length
-
-        for (int i = 0; i < _Length; i++) // make a copy of the current array
+        for (int i = 0; i < this->_Capacity; i++) // make a copy of the current array
         {
-            TempArr[i] = _APtr[i];
+            ResizedArr[i] = _APtr[i];
         }
 
-        _APtr = nullptr;
         delete[] _APtr; // delete the OG array
+        _APtr = nullptr;
+        _APtr = ResizedArr; // points to the new array 
 
-        int OldLen = _Length;
-        _Length = _Length * 2;  // increment the length of array
-        _APtr = new T[_Length]; // make  array with new length
-
-        for (int i = 0; i < OldLen; i++) // make a copy of the current array
-        {
-            _APtr[i] = TempArr[i];
-        }
-
-        delete[] TempArr; // deallcote the TempArray
     }
 
 public:
@@ -44,27 +36,28 @@ public:
     // Fill , Insert
     void PushElement(T Element)
     {
-        if (_Indx > _Length)
-        { // if the index exceed the length of array
+        if (_Capacity > _Length) // _Capacity -->> index
+        {                        // if the index exceed the length of array
             _ResizeTheArray();
         }
 
-        *(_APtr + _Indx) = Element; // index zero  (using dereferencing)
-        _Indx++;                    // increment the index
+        *(_APtr + _Capacity) = Element; // index zero  (using dereferencing)
+        _Capacity++;                    // increment the index
     }
 
     // Access
     T At(int Index) // return the element on specific index
     {
-        if (Index > _Length)
-            return -100;
+        if (Index > _Length || 0 > Index)
+            throw out_of_range("Index out of range");
+
         return _APtr[Index];
     }
 
     // Print
     void PrintAllElements()
     {
-        for (int i = 0; i < this->_Indx; i++)
+        for (int i = 0; i < this->_Capacity; i++)
         { // print the filled indices only
             cout << *(_APtr + i) << " ";
         }
@@ -74,7 +67,7 @@ public:
     // Search
     bool IsElementExisting(T ElementToCheck)
     {
-        for (int i = 0; i < this->_Indx; i++)
+        for (int i = 0; i < this->_Capacity; i++)
         {                                       //  the filled indices only
             if (*(_APtr + i) == ElementToCheck) // if the current element is the desired element
                 return true;
@@ -85,18 +78,25 @@ public:
     // Delete
     void PopBack() // O(1) Algorithm instead of O(N)
     {
-        T *TempArr = new T[this->_Indx--]; // Temp dynamic array -- i used the index not the length to print the actual located size
+        T *ResizedArr = new T[this->_Capacity--]; // Temp dynamic array -- i used the index not the length to print the actual located size
 
-        TempArr = clsDynamicArray<T>::_APtr; // copy the current array
-        _APtr = TempArr;                     // fill the array again without the last element
-        delete[] TempArr;                    // deallcoate the memory
+        for (int i = 0; i < _Capacity; i++) // make a copy of the current array
+        {
+            ResizedArr[i] = _APtr[i];
+        }
+
+       delete [] _APtr;
+       _APtr = nullptr;
+
+       _APtr = ResizedArr; // pointer will point the new array 
     }
 
     // Update
     void UpdateElement(int IndexOfElement, T NewValue)
     {
-        if (IndexOfElement > _Length)
-            return;
+        if (IndexOfElement > _Length || IndexOfElement < 0)
+            throw out_of_range("Index out of range");
+
         _APtr[IndexOfElement] = NewValue;
     }
 
