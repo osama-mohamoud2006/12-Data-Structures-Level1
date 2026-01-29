@@ -12,7 +12,7 @@ private:
 
     void _ResizeTheArray() // make copy of array then insert the elements again with new length
     {
-        _Length = _Length * 2;       // increment the length of array
+        _Length = _Length * 2;       // increase the length of array
         T *ResizedArr = new T[_Length]; // ResizedArr (Dynamic array) with new length
 
         for (int i = 0; i < this->_Capacity; i++) // make a copy of the current array
@@ -106,6 +106,7 @@ public:
     {
         delete[] _APtr; // deallocate the memory
     }
+
 };
 
 int main()
@@ -130,4 +131,6 @@ int main()
     Arr1.PopBack();
     cout << "\nAfter Poping The Last Element \n";
     Arr1.PrintAllElements();
+
+    vector<int> x= {1,2};
 }
