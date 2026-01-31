@@ -18,6 +18,8 @@ int main()
 
     cout << "\nThe Size(Num Of Elements in Queue) is: " << Q.size();
 
+    // As Queue is FIFO Behaviour, so you cann't Acessing Elements Randomly 
+    // Rule: The First In The First Pop So You Should Poping First Element To Access The Second Element 
     while(!Q.empty()) 
     {
 
