@@ -1,0 +1,25 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+// FIFO
+int main()
+{
+    queue<short> Q;
+    // The First Element Of Queue (the first element that will be removed)
+    Q.push(10); // push element to the queue
+    Q.push(20);
+    Q.push(30);
+    Q.push(40);
+
+    cout << "\nThe First Element Of The Queue: " << Q.front(); // 10
+
+    cout << "\nThe Last Element Of The Queue: " << Q.back(); // 40
+
+    cout << "\nThe Size(Num Of Elements in Queue) is: " << Q.size();
+
+    while(!Q.empty()) 
+    {
+
+    }
+}
