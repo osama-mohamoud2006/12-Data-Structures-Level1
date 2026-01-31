@@ -14,28 +14,26 @@ void PrintQueueElements(queue<T> Q)
     }
 };
 
-
 template <class T> // To use with whatever data type
 void PrintStackElements(stack<T> Stack)
 {
     while (!Stack.empty())
     {
-        cout << Stack.top() << " "; // To Print The Top Element 
-        Stack.pop();                  // To Pop The Last Element Then Pop The Others Untill The Stack Becomes Empty
+        cout << Stack.top() << " "; // To Print The Top Element
+        Stack.pop();                // To Pop The Last Element Then Pop The Others Untill The Stack Becomes Empty
     }
 };
 
-
-template <class T> // To use with whatever data type
-// i used call by val not by ref to avoid Poping the elements of OG queue
-void PushQueueElementsToStack(queue<T> Q)
+template <class T>
+ stack<T> PushQElementsToStack(queue<T> Q)
 {
-    stack<int> Stack; // LIFO
+    stack<T> Stack; // LIFO
     while (!Q.empty())
     {
-        Stack.push(Q.front()); // push the front element of the queue to the stack 
-        Q.pop(); 
+        Stack.push(Q.front()); // push the front element of the queue to the stack
+        Q.pop();
     }
+    return Stack;
 }
 
 // FIFO
@@ -80,5 +78,15 @@ int main()
     cout << "\nPrinting All Elements Of Queue 'Q'(After Swaping)\n";
     PrintQueueElements(Q);
 
+    std::cout << "\e[1;1H\e[2J";
+    // Flush the output buffer immediately (optional, but ensures the command runs right away)
+    std::cout.flush();
+
+
     // Reverse The Queue Elements Using Stack
+    cout << "\nPrinting All Elements Of Queue 'Q2'(After Swaping)\n";
+    PrintQueueElements(Q2);
+
+    cout<<"The Stack Element Are:\n";
+    PrintStackElements(PushQElementsToStack(Q2));
 }
