@@ -2,6 +2,16 @@
 #include <stack>
 using namespace std;
 
+template <typename T>                             // i used template to take parameter of any data type not single type only
+void PrintingStackElements(stack<T> StackToPrint) // call by val as i want to print elements without making the stack empty
+{
+    while (!StackToPrint.empty())
+    {
+        cout << StackToPrint.top() << endl;
+        StackToPrint.pop();
+    }
+}
+
 int main()
 {
     stack<int> S1; // template class from STL
@@ -36,32 +46,39 @@ int main()
     Stack1.push(30);
 
     cout << "\nPrinting Stack One Elements: \n";
-    while (!Stack1.empty()) // accessing all elements
-    {
-        cout << Stack1.top() << endl; // to get the top element
-        Stack1.pop();                 // to remove the latest element to access the rest of elements as stack works LIFO
-    }
+    PrintingStackElements(Stack1);
+    // while (!Stack1.empty()) // accessing all elements
+    // {
+    //     cout << Stack1.top() << endl; // to get the top element
+    //     Stack1.pop();                 // to remove the latest element to access the rest of elements as stack works LIFO
+    // }
 
     stack<short> Stack2;
     Stack2.push(40);
     Stack2.push(50);
     Stack2.push(60);
     cout << "\nPrinting Stack Two Elements: \n";
-    while (!Stack2.empty())
-    {
-        cout << Stack2.top() << endl;
-        Stack2.pop();
-    }
+    PrintingStackElements(Stack2);
+    // while (!Stack2.empty())
+    // {
+    //     cout << Stack2.top() << endl;
+    //     Stack2.pop();
+    // }
 
     cout << endl;
 
     Stack1.swap(Stack2); // swaping the stack1 elements with stack 2
 
-    cout << "\nPrinting Stack One Elements: \n";
-    while (!Stack1.empty()) // accessing all elements
-    {
-        cout << Stack1.top() << endl; // to get the top element
-        Stack1.pop();                 // to remove the latest element to access the rest of elements as stack works LIFO
-    }
+    cout << "\nPrinting Stack One Elements(After Swaping): \n";
+    PrintingStackElements(Stack1);
+    // while (!Stack1.empty()) // accessing all elements
+    // {
+    //     cout << Stack1.top() << endl; // to get the top element
+    //     Stack1.pop();                 // to remove the latest element to access the rest of elements as stack works LIFO
+    // }
+
+    cout << "\nPrinting Stack Two Elements(After Swaping): \n";
+    PrintingStackElements(Stack2);
+
     
 }
