@@ -1,6 +1,16 @@
 #include <iostream>
 #include <queue>
 using namespace std;
+template <class T> // To use with whatever data type
+// i used call by val not by ref to avoiding the elements of OG queue
+void PrintQueueElements(queue<T> Q)
+{
+    while (!Q.empty())
+    {
+        cout << Q.front() << " "; // To PRint The Elements
+        Q.pop();                  // To Pop The First Element At First Then Pop The Others Untill The Queue Becomes Empty
+    }
+};
 
 // FIFO
 int main()
@@ -21,12 +31,26 @@ int main()
     // As Queue is FIFO Behaviour, so you cann't Acessing Elements Randomly
     // Rule: The First In The First Pop So You Should Poping First Element To Access The Second Element And So ON
 
-    short Index =0; 
-    cout<<"Printing All Elements Of Queue\n";
-    while (!Q.empty())
-    {
-        cout<<"\nIndex: "<<Index++<<endl; 
-        cout<<Q.front(); // Accessing The First Element In The Queue 
-        Q.pop(); // Remove The First Element According To FIFO
-    }
+    //short Index = 0;
+    cout << "\n\nPrinting All Elements Of Queue 'Q' (Before Swaping)\n";
+    // while (!Q.empty())
+    // {
+    //     cout<<"\nIndex: "<<Index++<<endl;
+    //     cout<<Q.front(); // Accessing The First Element In The Queue
+    //     Q.pop(); // Remove The First Element According To FIFO
+    // };
+
+    PrintQueueElements(Q);
+
+    // Queue 2
+    queue<short> Q2;
+    // Add Elements To The Queue
+    Q2.push(100);
+    Q2.push(200);
+    Q2.push(300);
+
+    Q.swap(Q2); // Swap Q elements With Q2 Elements 
+
+    cout << "\nPrinting All Elements Of Queue 'Q'(After Swaping)\n";
+    PrintQueueElements(Q);
 }
