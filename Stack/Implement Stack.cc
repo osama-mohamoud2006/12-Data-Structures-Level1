@@ -26,7 +26,7 @@ public:
         VStack.pop_back();
     }
 
-    // top , the first const to avoid editing on return value 
+    // top , the first const to avoid editing on return value
     const T &Top() const //--> read-only function
     {
         if (this->Empty())
@@ -40,7 +40,13 @@ public:
         return (VStack.empty());
     }
 
-   
+    // swap
+    void Swap(clsStack<T> &Stack2)
+    {
+        clsStack<T> temp = *this; // 1
+        *this = Stack2;
+        Stack2 = temp;
+    }
 };
 
 int main()
@@ -50,12 +56,18 @@ int main()
     Stack1.Push(20);
     Stack1.Push(30);
 
+    clsStack<short> Stack2;
+    Stack2.Push(-1);
+    Stack2.Push(-2);
+    Stack2.Push(-3);
+
+    Stack1.Swap(Stack2);
+
     while (!Stack1.Empty())
     {
 
         cout << Stack1.Top() << endl;
         Stack1.Pop();
     }
-    //  Stack1.Pop();
- 
+    
 }
