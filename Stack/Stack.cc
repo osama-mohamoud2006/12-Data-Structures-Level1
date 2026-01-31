@@ -23,10 +23,45 @@ int main()
 
     // Print All Elements - As The Stack is LIFO Approach You Cann't Do Random Access To Its Elements LikeArray
 
-    cout<<"\n Printing Stack All Elements\n";
+    cout << "\n Printing Stack All Elements\n";
     while (!S1.empty())
     {
         cout << S1.top() << endl;
-        S1.pop(); // to remove the top element to access the other elements 
+        S1.pop(); // to remove the top element to access the other elements
     }
+
+    stack<short> Stack1;
+    Stack1.push(10);
+    Stack1.push(20);
+    Stack1.push(30);
+
+    cout << "\nPrinting Stack One Elements: \n";
+    while (!Stack1.empty()) // accessing all elements
+    {
+        cout << Stack1.top() << endl; // to get the top element
+        Stack1.pop();                 // to remove the latest element to access the rest of elements as stack works LIFO
+    }
+
+    stack<short> Stack2;
+    Stack2.push(40);
+    Stack2.push(50);
+    Stack2.push(60);
+    cout << "\nPrinting Stack Two Elements: \n";
+    while (!Stack2.empty())
+    {
+        cout << Stack2.top() << endl;
+        Stack2.pop();
+    }
+
+    cout << endl;
+
+    Stack1.swap(Stack2); // swaping the stack1 elements with stack 2
+
+    cout << "\nPrinting Stack One Elements: \n";
+    while (!Stack1.empty()) // accessing all elements
+    {
+        cout << Stack1.top() << endl; // to get the top element
+        Stack1.pop();                 // to remove the latest element to access the rest of elements as stack works LIFO
+    }
+    
 }
