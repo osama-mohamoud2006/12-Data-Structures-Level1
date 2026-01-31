@@ -18,10 +18,15 @@ int main()
 
     cout << "\nThe Size(Num Of Elements in Queue) is: " << Q.size();
 
-    // As Queue is FIFO Behaviour, so you cann't Acessing Elements Randomly 
-    // Rule: The First In The First Pop So You Should Poping First Element To Access The Second Element 
-    while(!Q.empty()) 
-    {
+    // As Queue is FIFO Behaviour, so you cann't Acessing Elements Randomly
+    // Rule: The First In The First Pop So You Should Poping First Element To Access The Second Element And So ON
 
+    short Index =0; 
+    cout<<"Printing All Elements Of Queue\n";
+    while (!Q.empty())
+    {
+        cout<<"\nIndex: "<<Index++<<endl; 
+        cout<<Q.front(); // Accessing The First Element In The Queue 
+        Q.pop(); // Remove The First Element According To FIFO
     }
 }
