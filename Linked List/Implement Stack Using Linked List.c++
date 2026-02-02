@@ -50,23 +50,34 @@ class clsStack : private clsStackInterface<T>
 {
 private:
     Node<T> *Head = nullptr;
-    Node<T> *TheLastestNode= nullptr;
+    Node<T> *NNode = nullptr;
 
 public:
-    void Push(T Element) override{
-        //1.create new node
-        Node<T> NNode = new Node(this->Element);
-        //2. link the new node with the pervioud one (the node that the head had)
+    void Push(T Element) override
+    {
+        // 1.create new node
+        NNode = new Node(this->Element);
+        // 2. link the new node with the pervioud one (the node that the head had)
         NNode->SetAddressOfNextNode(Head);
         Head = NNode;
-        TheLastestNode= NNode;
     }
 
-     virtual void Pop() override
-     {
-          Head = Head->AddressOfNextNode(); // Get The Address Of Next Node To Move The Head To It
+    virtual void Pop() override
+    {
+        Head = Head->AddressOfNextNode(); // Get The Address Of Next Node To Move The Head To It
+        delete NNode;                     // delete the last node
+    }
 
+    T Top() const override
+    {
+        return NNode->GetValue();
+    }
 
-     }
+    bool Empty()
 
 };
+
+int main()
+{
+
+}
