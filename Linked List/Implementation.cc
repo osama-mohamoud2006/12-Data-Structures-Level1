@@ -27,7 +27,7 @@ public:
         return this->Value;
     }
 
-    Node * AddressOfNextNode() const  
+    Node *AddressOfNextNode() const
     {
         return PointerToTheNextNode;
     }
@@ -54,7 +54,8 @@ int main()
 
     while (Temp != nullptr) // nullptr --> means the last Node
     {
-        cout<< Temp->GetValue() <<"\n";
+        cout << Temp->GetValue() << "\n";
         Temp = Temp->AddressOfNextNode();
     }
+    delete Temp; // deallocate 
 }
