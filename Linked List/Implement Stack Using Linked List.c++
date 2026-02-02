@@ -40,9 +40,8 @@ class clsStackInterface
 
     virtual void Push(T Element) = 0; // push
     virtual void Pop() = 0;           // pop
-    virtual T Top() = 0;              // top , the first const to avoid editing on return value
+    virtual T Top() = 0;              // top 
     virtual bool Empty() = 0;
-    // virtual void Swap(clsStack<T> Stack2) = 0;
 };
 
 template <class T>
