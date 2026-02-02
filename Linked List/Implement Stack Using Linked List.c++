@@ -50,33 +50,35 @@ class clsStack : private clsStackInterface<T>
 {
 private:
     Node<T> *Head = nullptr;
-    Node<T> *NNode = nullptr;
+    int count = 0;
 
 public:
     clsStack()
     {
         Head = nullptr;
-        NNode = nullptr;
+       
     };
 
     void Push(T Element) override
     {
         // 1.create new node
-        NNode = new Node(Element);
+        Node<T> *NNode = new Node(Element);
         // 2. link the new node with the pervioud one (the node that the head had)
         NNode->SetAddressOfNextNode(Head);
         Head = NNode;
+        count++;
     }
 
-    virtual void Pop() override
+    void Pop() override
     {
         if (this->Empty())
             throw std::invalid_argument("UnderFlow!\a");
 
-
+        Node<T> *Temp = Head;             // take last pushed node
         Head = Head->AddressOfNextNode(); // Get The Address Of Next Node To Move The Head To It
-          Node<T> * Temp = Head ;
-          delete Temp ;
+
+        delete Temp; // delete the last node
+        count--;
     }
 
     T Top() override
@@ -87,6 +89,17 @@ public:
     bool Empty() override
     {
         return (this->Head == nullptr);
+    }
+
+    int Size() const
+    {
+        return this->count;
+    }
+
+    // Destructor
+    ~clsStack()
+    {
+        while(!Empty()){Pop();}
     }
 };
 
