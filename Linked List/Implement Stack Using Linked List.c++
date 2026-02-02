@@ -72,9 +72,11 @@ public:
     {
         if (this->Empty())
             throw std::invalid_argument("UnderFlow!\a");
+
+
         Head = Head->AddressOfNextNode(); // Get The Address Of Next Node To Move The Head To It
-        delete NNode;                     // delete the last node
-        NNode = nullptr;
+          Node<T> * Temp = Head ;
+          delete Temp ;
     }
 
     T Top() override
