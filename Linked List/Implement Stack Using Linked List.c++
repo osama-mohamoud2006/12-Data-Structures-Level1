@@ -70,13 +70,16 @@ public:
 
     virtual void Pop() override
     {
+        if (this->Empty())
+            throw std::invalid_argument("UnderFlow!\a");
         Head = Head->AddressOfNextNode(); // Get The Address Of Next Node To Move The Head To It
         delete NNode;                     // delete the last node
+        NNode = nullptr;
     }
 
     T Top() override
     {
-        return NNode->GetValue();
+        return Head->GetValue();
     }
 
     bool Empty() override
@@ -92,5 +95,10 @@ int main()
     Stack1.Push(20);
     Stack1.Push(30);
     Stack1.Push(40);
-    cout << Stack1.Top() << endl;
+
+    while (!Stack1.Empty())
+    {
+        cout << Stack1.Top() << endl;
+        Stack1.Pop();
+    }
 }
