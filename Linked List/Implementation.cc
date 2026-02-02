@@ -32,7 +32,7 @@ int main()
     Node2->Value = 2;
     Node3->Value = 3;
 
-    // Connect Nodes with Each Other
+    // Connect Nodes With Each Other
     Node1->TheAddressOfTheNextNode = Node2;
     Node2->TheAddressOfTheNextNode = Node3 ;
     Node3->TheAddressOfTheNextNode =nullptr; /// as the node 3 is the last node
@@ -46,5 +46,5 @@ int main()
         Head= Head->TheAddressOfTheNextNode; 
     };
 
-
+    
 }
