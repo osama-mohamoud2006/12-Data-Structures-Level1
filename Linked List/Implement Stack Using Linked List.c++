@@ -53,6 +53,12 @@ private:
     Node<T> *NNode = nullptr;
 
 public:
+    clsStack()
+    {
+        Head = nullptr;
+        NNode = nullptr;
+    };
+
     void Push(T Element) override
     {
         // 1.create new node
@@ -68,16 +74,20 @@ public:
         delete NNode;                     // delete the last node
     }
 
-    T Top() const override
+    T Top() override
     {
         return NNode->GetValue();
     }
 
-    bool Empty()
-
+    bool Empty() override
+    {
+        return (this->Head == nullptr);
+    }
 };
 
 int main()
 {
-
+    clsStack<int> Stack1;
+    Stack1.Push(10);
+    cout<< Stack1.Top() <<endl; 
 }
