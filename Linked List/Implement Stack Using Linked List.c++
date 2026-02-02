@@ -62,7 +62,7 @@ public:
     void Push(T Element) override
     {
         // 1.create new node
-        NNode = new Node(this->Element);
+        NNode = new Node(Element);
         // 2. link the new node with the pervioud one (the node that the head had)
         NNode->SetAddressOfNextNode(Head);
         Head = NNode;
@@ -89,5 +89,8 @@ int main()
 {
     clsStack<int> Stack1;
     Stack1.Push(10);
-    cout<< Stack1.Top() <<endl; 
+    Stack1.Push(20);
+    Stack1.Push(30);
+    Stack1.Push(40);
+    cout << Stack1.Top() << endl;
 }
