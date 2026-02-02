@@ -25,7 +25,7 @@ void PrintStackElements(stack<T> Stack)
 };
 
 template <class T>
- stack<T> PushQElementsToStack(queue<T> Q)
+stack<T> PushQElementsToStack(queue<T> Q)
 {
     stack<T> Stack; // LIFO
     while (!Q.empty())
@@ -82,11 +82,10 @@ int main()
     // Flush the output buffer immediately (optional, but ensures the command runs right away)
     std::cout.flush();
 
-
     // Reverse The Queue Elements Using Stack
     cout << "\nPrinting All Elements Of Queue 'Q2'(After Swaping)\n";
     PrintQueueElements(Q2);
 
-    cout<<"The Stack Element Are:\n";
+    cout << "The Stack Element Are:\n";
     PrintStackElements(PushQElementsToStack(Q2));
 }
