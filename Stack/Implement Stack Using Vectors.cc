@@ -47,6 +47,8 @@ public:
         *this = Stack2;
         Stack2 = temp;
     }
+
+
 };
 
 int main()

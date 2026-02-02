@@ -48,15 +48,21 @@ void InsertElementAtTheBegging(Node<T> *&Head, T Value)
 
 template <typename T>
 void PrintAllNodes(Node<T> *Head)
-{ 
-    while(Head!=nullptr)
+{
+    while (Head != nullptr)
     {
-      cout<<  Head->GetValue() <<endl; 
-      Head= Head->PointerToTheNextNode();
+        cout << Head->GetValue() << endl;
+        Head = Head->AddressOfNextNode();
     }
 }
 
 int main()
 {
-    
+    Node<int> *Head = nullptr; // Head pointer
+    InsertElementAtTheBegging(Head, 10);
+    InsertElementAtTheBegging(Head, 20);
+    InsertElementAtTheBegging(Head, 30);
+    InsertElementAtTheBegging(Head, 40);
+
+    PrintAllNodes(Head);
 }
