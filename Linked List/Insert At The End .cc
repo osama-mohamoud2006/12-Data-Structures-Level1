@@ -33,22 +33,34 @@ void InsertAtTheEnd(Node *&Head, int value)
     if (Head == nullptr)
     {
         Head = NNode; // as no node connected to head
-        return ;
+        return;
     };
 
-    
-    //P2 : there are nodes
+    // P2 : there are nodes
 
-    //1.traversing All Untill Get (The next address = null )
-    Node * Temp = Head; 
-    while(Temp!=nullptr)
+    // 1.traversing All until Get (The next address = null )
+    Node *Temp = Head;
+    while (Temp != nullptr)
     {
         Temp = Temp->GetTheAddressOfNextNode(); // go to the next node
     };
 
-    //2.Here You Reached The (Next Address = null)
-    Temp->SetTheAddressForTheNextNode(NNode); // Set The Next
-    NNode->SetTheAddressForTheNextNode(nullptr);
+    // 2.Here You Reached The (Next Address = null)
+    Temp->SetTheAddressForTheNextNode(NNode);    // Set The Next Address Of The Last Node(Perviously) To New Node
+    NNode->SetTheAddressForTheNextNode(nullptr); // This The Last Node
+};
 
+int main()
+{
+    Node *Head = nullptr;
+    InsertAtTheEnd(Head, 10);
+    InsertAtTheEnd(Head, 20);
+    InsertAtTheEnd(Head, 30);
+    InsertAtTheEnd(Head, 40);
+
+    while (Head != nullptr)
+    {
+        cout << Head->GetValue() << endl;
+        Head = Head->GetTheAddressOfNextNode();
+    }
 }
-
