@@ -57,13 +57,13 @@ int main()
     InsertAtTheBegging(Head, 10);
     InsertAtTheBegging(Head, 20);
     InsertAtTheBegging(Head, 30);
-     InsertAtTheBegging(Head, 40);
-      InsertAtTheBegging(Head, 50);
+    InsertAtTheBegging(Head, 40);
+    InsertAtTheBegging(Head, 50);
 
     PrintList(Head);
 
     if (Search(Head, 50) != nullptr)
         cout << "Found The Node!\n";
     else
-        cout << "Didn't Get The Node !\n";
+        cout << "NULL !\n";
 }
