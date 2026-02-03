@@ -33,6 +33,7 @@ void InsertAtTheEnd(Node *&Head, int value)
     if (Head == nullptr)
     {
         Head = NNode; // as no node connected to head
+        NNode->SetTheAddressForTheNextNode(nullptr);
         return;
     };
 
@@ -40,7 +41,7 @@ void InsertAtTheEnd(Node *&Head, int value)
 
     // 1.traversing All until Get (The next address = null )
     Node *Temp = Head;
-    while (Temp != nullptr)
+    while (Temp->GetTheAddressOfNextNode() != nullptr) //IF IT IS THE LAST ELEMENT THEN THE NEXT ADDRESS WILL BE NULL FOR SURE
     {
         Temp = Temp->GetTheAddressOfNextNode(); // go to the next node
     };
