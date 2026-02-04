@@ -28,7 +28,6 @@ public:
     Node *GetTheAddressOfNextNode() { return this->Ptr; }
 };
 
-
 template <class T>
 class clsLinkedListUnderlying
 {
@@ -59,15 +58,24 @@ public:
         NNode->SetTheAddressForTheNextNode(nullptr);
     };
 
+    static void DeleteTheFirstNode(Node *&Head)
+    {
+        if (Head == nullptr)
+            return; // No Nodes
 
+        Node *TheFirstElement = Head;
+        Head = Head->GetTheAddressOfNextNode();                // move the head to the next node
+        TheFirstElement->SetTheAddressForTheNextNode(nullptr); // cut the link of first node with the second node
 
+        delete TheFirstElement;
+    };
 };
 
 template <class T>
 class QueueInterface // Abstract Class - Contract
 {
-    virtual void push() = 0;
-    virtual void pop() = 0;
+    virtual void push(T Element) = 0; // (Done)
+    virtual void pop() = 0; // (Done)
     virtual T front() = 0;
     virtual T back() = 0;
     virtual int size() = 0;
@@ -94,10 +102,15 @@ public:
         count++;
     };
 
+    void pop() override // FIFO
+    {
+        DeleteTheFirstNode(Head); // built-in Under Flow Protection
+        count--;
+    };
+
 
 };
 
 int main()
 {
-
 }
