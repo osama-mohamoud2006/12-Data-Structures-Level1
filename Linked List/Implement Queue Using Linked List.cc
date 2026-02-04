@@ -5,27 +5,27 @@ template <class T>
 class Node
 {
 private:
-    Node *Ptr;
+    Node<T> *Ptr;
     T Value;
 
 public:
-    Node()
-    {
-        Ptr = nullptr;
-        Value = 0;
-    }
+    // Node()
+    // {
+    //     Ptr = nullptr;
+    //     Value = 0;
+    // }
     void SetTheAddressForTheNextNode(Node *Ptr)
     {
         this->Ptr = Ptr;
     }
 
-    void SetValue(int Value)
+    void SetValue(T Value)
     {
         this->Value = Value;
     }
 
     // Get
-    int GetValue() { return Value; }
+    T GetValue() { return Value; }
     Node *GetTheAddressOfNextNode() { return this->Ptr; }
 };
 
@@ -34,18 +34,20 @@ class clsLinkedListUnderlying
 {
 
 public:
-    static void InsertElementToTheLastNode(Node<T> *&Head, T value)
+    static bool InsertElementToTheLastNode(Node<T> *&Head, Node<T> *&Tail, T value)
     {
 
-        Node<T> *NNode = new Node();
+        Node<T> *NNode = new Node<T>();
         NNode->SetValue(value);
+        Tail = NNode;
 
         // it is the first element to push
         if (Head == nullptr)
         {
             Head = NNode;
+            Tail = Head;
             NNode->SetTheAddressForTheNextNode(nullptr);
-            return;
+            return true;
         };
 
         Node<T> *Current = Head;
@@ -55,31 +57,55 @@ public:
         };
 
         Current->SetTheAddressForTheNextNode(NNode); // set the address of next node to new node instead of null (linking the nodes together)
-
         NNode->SetTheAddressForTheNextNode(nullptr);
+
+        return true;
     };
 
-    static void DeleteTheFirstNode(Node<T> *&Head)
+    static bool DeleteTheFirstNode(Node<T> *&Head, Node<T> *&Tail)
     {
         if (Head == nullptr)
-            return; // No Nodes
+        {
+            Tail = nullptr;
+            return false; // No Nodes
+        };
+
+        if (Head->GetTheAddressOfNextNode() == nullptr)
+        {
+            Tail = nullptr;
+        };
 
         Node<T> *TheFirstElement = Head;
         Head = Head->GetTheAddressOfNextNode();                // move the head to the next node
         TheFirstElement->SetTheAddressForTheNextNode(nullptr); // cut the link of first node with the second node
 
         delete TheFirstElement;
+
+        if (Head == nullptr)
+        {
+            Tail = nullptr;
+        }
+
+        return true;
     };
 
-    static T TheLastNodeValue(Node<T> *Head)
+    static T TheLastNodeValue(Node<T> *Tail)
     {
-        while (Head->GetTheAddressOfNextNode() != nullptr) // walkthrough nodes until get the last node
-        {
-            Head = Head->GetTheAddressOfNextNode(); // move to the next Node
-        };
 
-        // The Last Node
-        return Head->GetValue();
+        return Tail->GetValue();
+        // else return TheLastPush ;
+        //  if (Head == nullptr) // No Nodes
+        //  {
+        //      return -1;
+        //  }
+
+        // while (Head->GetTheAddressOfNextNode() != nullptr) // walkthrough nodes until get the last node
+        // {
+        //     Head = Head->GetTheAddressOfNextNode(); // move to the next Node
+        // };
+
+        // // The Last Node
+        // return Head->GetValue();
     }
 };
 
@@ -88,9 +114,9 @@ class QueueInterface // Abstract Class - Contract
 {
     virtual void push(T Element) = 0; // (Done)
     virtual void pop() = 0;           // (Done)
-    virtual T front() = 0;
-    virtual T back() = 0;
-    virtual int size() = 0;
+    virtual T front() = 0;            // (Done)
+    virtual T back() = 0;             // (Done)
+    virtual int size() = 0;           // (Done)
     virtual bool empty() = 0;
 };
 
@@ -99,38 +125,66 @@ class queue : private QueueInterface<T>
 {
 private:
     Node<T> *Head;
+    Node<T> *Tail;
     int count;
 
 public:
     queue()
     {
         Head = nullptr;
+        Tail = nullptr;
         count = 0;
     }
 
     void push(T Element) override
     {
-        clsLinkedListUnderlying<T>::InsertElementToTheLastNode(Head, Element);
-        count++;
+        if (clsLinkedListUnderlying<T>::InsertElementToTheLastNode(Head, Tail, Element))
+            count++;
     };
 
     void pop() override // FIFO
     {
-        clsLinkedListUnderlying<T>::DeleteTheFirstNode(Head); // built-in Under Flow Protection
-        count--;
+        if (clsLinkedListUnderlying<T>::DeleteTheFirstNode(Head, Tail)) // built-in Under Flow Protection
+            count--;
     };
 
     T front() override
     {
-        return Head->GetValue();
+        return (Head != nullptr) ? Head->GetValue() : NULL;
     };
 
     T back() override
     {
-        return clsLinkedListUnderlying<T>::TheLastNodeValue();
+        return clsLinkedListUnderlying<T>::TheLastNodeValue(Tail);
+    };
+
+    int size() override
+    {
+        return this->count;
+    };
+
+    bool empty() override
+    {
+        return (Head == nullptr);
     };
 };
 
 int main()
 {
+    queue<string> Q1;
+    Q1.push("1");
+    Q1.push("2");
+    Q1.push("3");
+    Q1.push("Iam The Last4");
+    cout << "\nThe Last Element is: " << Q1.back() << endl;
+    cout << "the size is: " << Q1.size() << endl;
+
+    cout << "\nThe Queue Elements Are: \n";
+    while (!Q1.empty())
+    {
+        cout << Q1.front() << endl;
+        Q1.pop();
+    }
+    cout << "\nthe size is: " << Q1.size() << endl;
+    cout << "\nThe Last Element1 is: " << Q1.back() << endl;
 }
