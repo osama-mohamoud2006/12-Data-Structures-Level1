@@ -92,9 +92,12 @@ public:
     static T TheLastNodeValue(Node<T> *Tail)
     {
         if (Tail != nullptr)
+        {
             return Tail->GetValue();
+        };
+         
+        return T();
     };
-
 };
 
 template <class T>
@@ -138,7 +141,9 @@ public:
 
     T front() override
     {
-        return (Head != nullptr) ? Head->GetValue() : NULL;
+        if (Head != nullptr)
+            return Head->GetValue();
+        return T();
     };
 
     T back() override
