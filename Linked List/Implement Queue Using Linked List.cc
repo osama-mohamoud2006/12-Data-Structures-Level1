@@ -1,11 +1,12 @@
 #include <iostream>
 using namespace std;
 
+template <class T>
 class Node
 {
 private:
     Node *Ptr;
-    int Value;
+    T Value;
 
 public:
     Node()
@@ -33,10 +34,10 @@ class clsLinkedListUnderlying
 {
 
 public:
-    static void InsertElementToTheLastNode(Node *&Head, T value)
+    static void InsertElementToTheLastNode(Node<T> *&Head, T value)
     {
 
-        Node *NNode = new Node();
+        Node<T> *NNode = new Node();
         NNode->SetValue(value);
 
         // it is the first element to push
@@ -47,7 +48,7 @@ public:
             return;
         };
 
-        Node *Current = Head;
+        Node<T> *Current = Head;
         while (Current->GetTheAddressOfNextNode() != nullptr)
         {
             Current = Current->GetTheAddressOfNextNode(); // move the current ptr to another node
@@ -58,24 +59,35 @@ public:
         NNode->SetTheAddressForTheNextNode(nullptr);
     };
 
-    static void DeleteTheFirstNode(Node *&Head)
+    static void DeleteTheFirstNode(Node<T> *&Head)
     {
         if (Head == nullptr)
             return; // No Nodes
 
-        Node *TheFirstElement = Head;
+        Node<T> *TheFirstElement = Head;
         Head = Head->GetTheAddressOfNextNode();                // move the head to the next node
         TheFirstElement->SetTheAddressForTheNextNode(nullptr); // cut the link of first node with the second node
 
         delete TheFirstElement;
     };
+
+    static T TheLastNodeValue(Node<T> *Head)
+    {
+        while (Head->GetTheAddressOfNextNode() != nullptr) // walkthrough nodes until get the last node
+        {
+            Head = Head->GetTheAddressOfNextNode(); // move to the next Node
+        };
+
+        // The Last Node
+        return Head->GetValue();
+    }
 };
 
 template <class T>
 class QueueInterface // Abstract Class - Contract
 {
     virtual void push(T Element) = 0; // (Done)
-    virtual void pop() = 0; // (Done)
+    virtual void pop() = 0;           // (Done)
     virtual T front() = 0;
     virtual T back() = 0;
     virtual int size() = 0;
@@ -86,7 +98,7 @@ template <class T>
 class queue : private QueueInterface<T>
 {
 private:
-    Node *Head;
+    Node<T> *Head;
     int count;
 
 public:
@@ -104,11 +116,19 @@ public:
 
     void pop() override // FIFO
     {
-        DeleteTheFirstNode(Head); // built-in Under Flow Protection
+        clsLinkedListUnderlying<T>::DeleteTheFirstNode(Head); // built-in Under Flow Protection
         count--;
     };
 
+    T front() override
+    {
+        return Head->GetValue();
+    };
 
+    T back() override
+    {
+        return clsLinkedListUnderlying<T>::TheLastNodeValue();
+    };
 };
 
 int main()
