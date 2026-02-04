@@ -23,7 +23,19 @@ public:
     Node *GetTheAddressOfNextNode() { return this->Ptr; }
 };
 
-class queue
+template <class T>
+class QueueInterface // Abstract Class - Contract 
+{
+    virtual void push() = 0;
+    virtual void pop() = 0;
+    virtual T front() = 0;
+    virtual T back() = 0;
+    virtual int size() = 0;
+    virtual bool empty() = 0;
+};
+
+template <class T>
+class queue : private QueueInterface<T>
 {
 private:
     Node *Head;
@@ -34,12 +46,5 @@ public:
         Head = nullptr;
     }
 
-    /*
-    push()
- pop()
- front()
- back()
- size()
- empty()
-    */
+
 };
