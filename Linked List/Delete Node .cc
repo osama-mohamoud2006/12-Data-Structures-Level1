@@ -8,6 +8,11 @@ private:
     int Value;
 
 public:
+    Node()
+    {
+        Ptr = nullptr;
+        Value = 0;
+    }
     void SetTheAddressForTheNextNode(Node *Ptr)
     {
         this->Ptr = Ptr;
@@ -37,6 +42,7 @@ Node *Find(Node *Head, int value)
 void DeleteNode(Node *&Head, int value)
 {
     Node *CurrentNode = Head;
+    Node *Prev = Head;
 
     if (Head == nullptr)
         return; // No Nodes To Delete
@@ -44,12 +50,14 @@ void DeleteNode(Node *&Head, int value)
     // it is the first node
     if (Head->GetValue() == value)
     {
-        Head = Head->GetTheAddressOfNextNode();
-        delete CurrentNode;
+        Head = Head->GetTheAddressOfNextNode(); // move the head to the next node as the first node will be deleted
+
+        delete Prev;
         return;
     };
 
-    Node *Prev = nullptr;
+    CurrentNode= Head->GetTheAddressOfNextNode(); // as if you reached here then it isn't the fist node that have the desired value then go to the next node to avoid unnecessary 1 iteration 
+    
     while (CurrentNode != nullptr) // if the current node isn't the node that have the desired value
     {
         if (CurrentNode->GetValue() == value)
@@ -109,10 +117,10 @@ int main()
     InsertAtTheEnd(Head, 30);
     InsertAtTheEnd(Head, 40);
 
-    cout<<"\nBefore Deleting Any Node\n"; 
+    cout << "\nBefore Deleting Any Node\n";
     PrintList(Head);
 
-    cout<<"\nAfterDeleting a Node\n";
+    cout << "\nAfterDeleting a Node\n";
     DeleteNode(Head, 10);
     PrintList(Head);
 }
