@@ -29,11 +29,21 @@ public:
 };
 
 // insert at the begging
-void InsertAtTheBegging() {
+void InsertAtTheBegging(Node *&Head, int value)
+{
+    Node *NNode = new Node();
+    NNode->SetValue(value);
 
+    if (Head == nullptr) //  the inserted node is the first node
+    {
+        Head = NNode;
+        return;
+    };
+    NNode->SetTheAddressForTheNextNode(Head);
+    Head = NNode;
 };
 
-void DeleteTheLastNode(Node *Head)
+void DeleteTheLastNode(Node *&Head)
 {
     if (Head == nullptr)
         return; // the linked list is empty
@@ -41,6 +51,7 @@ void DeleteTheLastNode(Node *Head)
     if (Head->GetTheAddressOfNextNode() == nullptr) // there is one node only
     {
         delete Head;
+        Head = nullptr;
         return;
     };
     Node *Prev = Head;
@@ -55,6 +66,16 @@ void DeleteTheLastNode(Node *Head)
     delete Current;
 };
 
+Node *Find(Node *Head, int value)
+{
+    while (Head != nullptr)
+    {
+        if (Head->GetValue() == value)
+            return Head;
+        Head = Head->GetTheAddressOfNextNode();
+    }
+    return nullptr;
+};
 
 void PrintList(Node *Head)
 {
@@ -67,27 +88,16 @@ void PrintList(Node *Head)
 
 int main()
 {
-        Node *Head = nullptr;
-    Node *Node1 = new Node();
-    Node *Node2 = new Node();
-    Node *Node3 = new Node();
-    Node *Node4 = new Node();
-
-    Node1->SetValue(10);
-    Node2->SetValue(20);
-    Node3->SetValue(30);
-    Node4->SetValue(40);
-
-    Node1->SetTheAddressForTheNextNode(Node2);
-    Node2->SetTheAddressForTheNextNode(Node3);
-    Node3->SetTheAddressForTheNextNode(Node4);
-    Node4->SetTheAddressForTheNextNode(nullptr);
-
-    Head = Node1;
+    Node *Head = nullptr;
+    InsertAtTheBegging(Head, 40);
+    InsertAtTheBegging(Head, 30);
+    InsertAtTheBegging(Head, 20);
+    InsertAtTheBegging(Head, 10);
 
     cout << "\nBefore Deleting The Last Node\n";
     PrintList(Head);
 
+   
     cout << "\nAfter Deleting The Last Node\n";
     DeleteTheLastNode(Head);
     PrintList(Head);
