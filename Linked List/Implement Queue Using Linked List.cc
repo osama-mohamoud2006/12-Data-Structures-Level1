@@ -91,22 +91,10 @@ public:
 
     static T TheLastNodeValue(Node<T> *Tail)
     {
+        if (Tail != nullptr)
+            return Tail->GetValue();
+    };
 
-        return Tail->GetValue();
-        // else return TheLastPush ;
-        //  if (Head == nullptr) // No Nodes
-        //  {
-        //      return -1;
-        //  }
-
-        // while (Head->GetTheAddressOfNextNode() != nullptr) // walkthrough nodes until get the last node
-        // {
-        //     Head = Head->GetTheAddressOfNextNode(); // move to the next Node
-        // };
-
-        // // The Last Node
-        // return Head->GetValue();
-    }
 };
 
 template <class T>
