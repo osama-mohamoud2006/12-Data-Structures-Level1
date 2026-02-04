@@ -62,7 +62,9 @@ void DeleteNode(Node *&Head, int value)
     {
         if (CurrentNode->GetValue() == value)
             break;                                            // exit the loop if you got the desired value
+
         Prev = CurrentNode;                                   // the prev node was the current node (previously)
+        
         CurrentNode = CurrentNode->GetTheAddressOfNextNode(); // move to the next node
     };
 
