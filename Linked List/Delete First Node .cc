@@ -35,19 +35,10 @@ void DeleteTheFirstNode(Node *&Head)
         return;
 
     Node *CurrentNode = Head;
-    if (Head->GetTheAddressOfNextNode() == nullptr) // if there is one node only
-    {
-        delete CurrentNode;
-        Head = nullptr;
-        return;
-    }
-
-    else // if there are other nodes
-    {
-        Head = Head->GetTheAddressOfNextNode(); // move the Head to next node
-        CurrentNode->SetTheAddressForTheNextNode(nullptr);
-        delete CurrentNode;
-    };
+    
+    Head = Head->GetTheAddressOfNextNode(); // move the Head to next node
+    CurrentNode->SetTheAddressForTheNextNode(nullptr);
+    delete CurrentNode;
 };
 
 void PrintList(Node *Head)
@@ -67,11 +58,22 @@ int main()
     Node *Node3 = new Node();
     Node *Node4 = new Node();
 
-    Head = Node1;
     Node1->SetValue(10);
     Node2->SetValue(20);
     Node3->SetValue(30);
     Node4->SetValue(40);
+
+    Node1->SetTheAddressForTheNextNode(Node2);
+    Node2->SetTheAddressForTheNextNode(Node3);
+    Node3->SetTheAddressForTheNextNode(Node4);
+    Node4->SetTheAddressForTheNextNode(nullptr);
+
+    Head = Node1;
+
     cout << "\nBefore Deleting The First Node\n";
+    PrintList(Head);
+
+    cout << "\nAfter Deleting The First Node\n";
+    DeleteTheFirstNode(Head);
     PrintList(Head);
 };
