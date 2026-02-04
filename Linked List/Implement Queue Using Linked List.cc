@@ -160,6 +160,14 @@ public:
     {
         return (Head == nullptr);
     };
+
+    ~queue()
+    {
+        while(!empty() )
+        {
+             pop();
+        }
+    }
 };
 
 int main()
