@@ -25,13 +25,50 @@ void InsertAtTheBeginning(Node *&Head, int value)
 
     if (Head != nullptr) // there are other nodes
     {
-        Head->Prev = NNode; // there is node connected to the head already so i want to set its prev ptr to the new node 
+        Head->Prev = NNode; // there is node connected to the head already so i want to set its prev ptr to the new node
     }
 
-    Head = NNode; // move the head to the new node 
+    Head = NNode; // move the head to the new node
 };
 
+void PrintEachNode(Node *Head)
+{
+
+    // Prev
+    if (Head->Prev != nullptr)
+        cout << Head->Prev->value;
+    else
+        cout << "NULL";
+
+    // Current
+    cout << " <--> " << Head->value << " <--> ";
+
+    // Next
+    if (Head->Next != nullptr)
+        cout << Head->Next->value<<"\n";
+    else
+        cout << "NULL";
+};
+
+void PrintAllNodes(Node *Head)
+{
+    while (Head != nullptr)
+    {
+        PrintEachNode(Head);
+        Head = Head->Next;
+    };
+}
 int main()
 {
-    
+    Node *Head = nullptr;
+    InsertAtTheBeginning(Head, 900);
+    InsertAtTheBeginning(Head, 800);
+
+    InsertAtTheBeginning(Head, 700);
+
+    InsertAtTheBeginning(Head, 600);
+
+    InsertAtTheBeginning(Head, 500);
+
+    PrintAllNodes(Head);
 }
