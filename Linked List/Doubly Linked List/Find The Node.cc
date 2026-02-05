@@ -71,11 +71,12 @@ void PrintNodeByNodeDetails(Node *Head)
     };
 };
 
-Node * FindNode(Node * Head , int value)
+Node *FindNode(Node *Head, int value)
 {
-    while(Head != nullptr)
+    while (Head != nullptr)
     {
-        if(Head->value == value) return Head ; // if the current node is the desired node
+        if (Head->value == value)
+            return Head;   // if the current node is the desired node
         Head = Head->Next; // move to the next node
     };
     return nullptr;
@@ -83,8 +84,14 @@ Node * FindNode(Node * Head , int value)
 
 int main()
 {
-    Node *Head= nullptr;
-    InsertAtTheBeginning(Head,40);
-     InsertAtTheBeginning(Head,30);
-      InsertAtTheBeginning(Head,40);
+    Node *Head = nullptr;
+    InsertAtTheBeginning(Head, 40);
+    InsertAtTheBeginning(Head, 30);
+    InsertAtTheBeginning(Head, 20);
+    InsertAtTheBeginning(Head, 10);
+
+    Node *NodeToGet = FindNode(Head, 20);
+    PrintNodeDetails(NodeToGet);
+
+
 }
