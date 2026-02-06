@@ -18,25 +18,25 @@ public:
 
 void DeleteTheNode(Node *&TheNodeYouWantToDelete, Node *&Head)
 {
-    if (Head == nullptr || TheNodeYouWantToDelete == nullptr)
+    if (Head == nullptr || TheNodeYouWantToDelete == nullptr) 
         return;
 
-    if (TheNodeYouWantToDelete == Head)
+    if (TheNodeYouWantToDelete == Head) // move the head to the next node if you want to delete the first node 
     {
         Head = TheNodeYouWantToDelete->Next;
     }
 
-    if (TheNodeYouWantToDelete->Next != nullptr)
+    if (TheNodeYouWantToDelete->Next != nullptr) // There is next node
     {
-        TheNodeYouWantToDelete->Next->Prev = TheNodeYouWantToDelete->Prev;
+        TheNodeYouWantToDelete->Next->Prev = TheNodeYouWantToDelete->Prev; //set the prev of next node to the prev of the current node 
     };
 
-    if (TheNodeYouWantToDelete->Prev != nullptr)
+    if (TheNodeYouWantToDelete->Prev != nullptr) // there is prev node
     {
-        TheNodeYouWantToDelete->Prev->Next = TheNodeYouWantToDelete->Next;
+        TheNodeYouWantToDelete->Prev->Next = TheNodeYouWantToDelete->Next; // set the next of prev node to the next of current node 
     };
 
-    delete TheNodeYouWantToDelete;
+    delete TheNodeYouWantToDelete; // delete the current node 
     TheNodeYouWantToDelete=nullptr;
 };
 
