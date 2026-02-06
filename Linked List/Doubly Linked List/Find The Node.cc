@@ -90,7 +90,7 @@ int main()
     InsertAtTheBeginning(Head, 20);
     InsertAtTheBeginning(Head, 10);
 
-    Node *NodeToGet = FindNode(Head, 20);
+    Node *NodeToGet = FindNode(Head, 40);
     PrintNodeDetails(NodeToGet);
 
 
