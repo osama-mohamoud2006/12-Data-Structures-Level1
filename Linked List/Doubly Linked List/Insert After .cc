@@ -24,6 +24,7 @@ Node *Find(Node *Head, int value)
             return Head;
         Head = Head->Next;
     }
+    return nullptr;
 }
 
 void InsetAtTheBeginning(Node *&Head, int value)
@@ -68,6 +69,7 @@ void PrintNextNode(Node *Head)
         cout << Head->value << " <--> ";
         Head = Head->Next;
     }
+    cout << "NULL";
 }
 
 int main()
@@ -80,4 +82,6 @@ int main()
 
     cout<<"\nBefore Inserting After\n";
     PrintNextNode(Head);
+
+    Node * Find
 }
