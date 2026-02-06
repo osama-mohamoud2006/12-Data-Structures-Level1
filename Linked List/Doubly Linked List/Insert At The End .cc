@@ -21,25 +21,25 @@ void InsertAtTheEnd(Node *&Head, int value)
     // 1.create new node
     Node *NNode = new Node(value);
 
-    NNode->Next = nullptr;
+    NNode->Next = nullptr; // The Next Ptr Will Be Null As It Is The Last Node
 
-    if (Head == nullptr) // the first node
+    if (Head == nullptr) // If The New Node Is The First Node
     {
         NNode->Prev = nullptr;
-        Head = NNode;
+        Head = NNode; //as it is the first node 
         return;
     }
 
     else
     {
-        Node *Current = Head;
+        Node *Current = Head; // make copy of head to traversing all nodes 
         while (Current->Next != nullptr)
         {
             Current = Current->Next; // move to the next node
         };
 
-        // the last node
-        Current->Next = NNode;
+        // Got the last node
+        Current->Next = NNode; 
         NNode->Prev = Current;
     }
 };
