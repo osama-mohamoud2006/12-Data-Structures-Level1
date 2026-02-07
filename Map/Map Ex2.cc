@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <string>
 using namespace std;
 
 class clsPerson
@@ -9,6 +10,15 @@ private:
     short age;
 
 public:
+    clsPerson()
+    {
+        name = "";
+        age = 0;
+    }
+    bool isEmpty()
+    {
+        return (name == "" || age == 0);
+    }
     clsPerson(string name, short age)
     {
         this->name = name;
@@ -17,17 +27,17 @@ public:
 
     string Print() const
     {
-        return  "The Name Is: " + this->name +"\n";
-        + "The Age Is: " + this->age +"\n";
+        return ("The Name Is: " + this->name + "\n" + "The Age Is: " + to_string(this->age));
     }
 };
 
-void InsertObjToMap(map<string, clsPerson> &StudentsDetailsWithID, string Id, const clsPerson &Obj)
+void InsertObjToMap(map<string, clsPerson> &StudentsDetailsWithID, string &Id, clsPerson &Obj)
 {
     // StudentsDetailsWithID--> Map Name
     // Id --> Key
     // Obj --> Associated Value
-    StudentsDetailsWithID[Id] = Obj;
+    if (Id != "" || !Obj.isEmpty())
+        StudentsDetailsWithID[Id] = Obj;
 };
 
 int main()
@@ -45,7 +55,8 @@ int main()
     // Print Map Elements
     for (const auto &Pairs : StudentsMap)
     {
-        cout<<"The ID: "<<Pairs.first<<"\n";
-        cout<<"The Student Details Is: "<<Pairs.second.Print()<<endl; 
+        cout << "\nThe ID: " << Pairs.first << "\n";
+        cout << "The Student Details:\n"
+             << Pairs.second.Print() << endl;
     }
-}
+};
