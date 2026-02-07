@@ -35,6 +35,7 @@ void DeleteTheLastNode(Node *&Head)
     };
 
     // get the node prev the last node
+    Temp->Next->Prev = nullptr;
     delete Temp->Next;
     Temp->Next = nullptr;
 };
