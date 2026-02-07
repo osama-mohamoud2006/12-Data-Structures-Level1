@@ -10,11 +10,13 @@ int main()
     // Students[Key] = Associative value
     Students["Ahmed"] = 100;
     Students["Mai"] = 90;
-    Students["Laila"] = 80;
+    Students["lala"] = 80;
 
     // Print Map Elements
     for (const auto &Pairs : Students) // & to avoid unnecessary copy
     {
+        // first --> Key
+        // second --> Associative value
         cout << "Student Name :" << Pairs.first << "\n"
              << "Grade: " << Pairs.second << endl;
     };
@@ -25,5 +27,17 @@ int main()
     {
         cout << "Name: Mai\n"
              << "Grade: " << Students["Mai"] << endl;
+    };
+
+    cout << "\n\nFind2\n";
+    string StuName = "Ahmed"; // --> The KEY
+    if (Students.find(StuName) != Students.end())
+    {
+        cout << "Name: " << StuName << "\n"
+             << "Grade: " << Students[StuName] << endl;
     }
-}
+    else
+    {
+        cout << "this element isn't existing\n";
+    };
+};
