@@ -21,7 +21,7 @@ void DeleteTheLastNode(Node *&Head)
     if (Head == nullptr)
         return;
 
-    if (Head->Next == nullptr)
+    if (Head->Next == nullptr) // if there is one node only 
     {
         delete Head;
         Head = nullptr;
@@ -29,12 +29,12 @@ void DeleteTheLastNode(Node *&Head)
     };
 
     Node *Temp = Head;
-    while (Temp->Next->Next != nullptr)
+    while (Temp->Next->Next != nullptr) // find the Next ptr of the node that prev the last node 
     {
         Temp = Temp->Next;
     };
 
-    // get the node prev the last node
+    // got the node prev the last node
     delete Temp->Next;
     Temp->Next = nullptr;
 };
