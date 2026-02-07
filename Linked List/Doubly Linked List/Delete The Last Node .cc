@@ -35,7 +35,6 @@ void DeleteTheLastNode(Node *&Head)
     };
 
     // get the node prev the last node
-    Temp->Next->Prev = nullptr;
     delete Temp->Next;
     Temp->Next = nullptr;
 };
@@ -72,9 +71,9 @@ int main()
 {
     Node *Head = nullptr;
     InsertAtTheBeginning(Head, 800);
-   // InsertAtTheBeginning(Head, 700);
-    //InsertAtTheBeginning(Head, 600);
-    //InsertAtTheBeginning(Head, 500);
+    InsertAtTheBeginning(Head, 700);
+    InsertAtTheBeginning(Head, 600);
+    InsertAtTheBeginning(Head, 500);
 
     cout<<"\nBefore Deleting The LastNode\n";
     PrintNextNode(Head);
